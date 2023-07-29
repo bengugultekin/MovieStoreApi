@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using MovieStoreApi.Application.ActorOperations.Commands;
 using MovieStoreApi.Application.ActorOperations.Queries;
 
 namespace MovieStoreApi;
@@ -36,5 +37,45 @@ public class ActorController : ControllerBase
 
         var obj = query.Handle();
         return Ok(obj);
+    }
+
+    [HttpPost]
+    public IActionResult AddActor([FromBody] CreateActorViewModel model)
+    {
+        CreateActorCommand command = new CreateActorCommand(_context, _mapper);
+        command.model = model;
+
+        CreateActorCommandValidator validator = new CreateActorCommandValidator();
+        validator.ValidateAndThrow(command);
+
+        command.Handle();
+        return Ok();
+    }
+
+    [HttpPut("{id}")]
+    public IActionResult UpdateActor(int id, [FromBody] UpdateActorViewModel model)
+    {
+        UpdateActorCommand command = new UpdateActorCommand(_context);
+        command.ActorId = id;
+        command.model = model;
+
+        UpdateActorCommandValidator validator = new UpdateActorCommandValidator();
+        validator.ValidateAndThrow(command);
+
+        command.Handle();
+        return Ok();
+    }
+
+    [HttpDelete("{id}")]
+    public IActionResult DeleteActor(int id)
+    {
+        DeleteActorCommand command = new DeleteActorCommand(_context);
+        command.ActorId = id;
+
+        DeleteActorCommandValidator validator = new DeleteActorCommandValidator();
+        validator.ValidateAndThrow(command);
+
+        command.Handle();
+        return Ok();
     }
 }

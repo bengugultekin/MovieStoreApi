@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using MovieStoreApi.Application.ActorOperations.Commands;
 using MovieStoreApi.Application.ActorOperations.Queries;
 
 namespace MovieStoreApi;
@@ -9,5 +10,6 @@ public class MappingProfile : Profile
     {
         CreateMap<Actor, ActorsViewModel>();
         CreateMap<Actor, ActorDetailViewModel>();
+        CreateMap<CreateActorViewModel, Actor>();
     }
 }

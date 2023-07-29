@@ -9,4 +9,5 @@ public interface IMovieStoreDbContext
     DbSet<Director> Directors { get; set; }
     DbSet<Genre> Genres { get; set; }
 
+    int SaveChanges();
 }

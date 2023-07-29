@@ -16,7 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Application\ActorOperations\Commands\" />
     <Folder Include="Controllers\" />
   </ItemGroup>
 
