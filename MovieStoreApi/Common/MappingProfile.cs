@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MovieStoreApi.Application.ActorOperations.Commands;
 using MovieStoreApi.Application.ActorOperations.Queries;
+using MovieStoreApi.Application.DirectorOperations;
+using MovieStoreApi.Application.DirectorOperations.Queries;
 
 namespace MovieStoreApi;
 
@@ -11,5 +13,9 @@ public class MappingProfile : Profile
         CreateMap<Actor, ActorsViewModel>();
         CreateMap<Actor, ActorDetailViewModel>();
         CreateMap<CreateActorViewModel, Actor>();
+
+        CreateMap<Director, DirectorsViewModel>();
+        CreateMap<Director, DirectorDetailViewModel>();
+        CreateMap<CreateDirectorModel, Director>();
     }
 }
