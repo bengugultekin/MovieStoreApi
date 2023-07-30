@@ -32,6 +32,21 @@ public class DataGenerator
                     StarringMovies = "first"
                 }
                 );
+            context.Genres.AddRange(
+                new Genre
+                {
+                    Name = "Documentary"
+                },
+                new Genre
+                {
+                    Name = "Science Fiction"
+                },
+                new Genre
+                {
+                    Name = "Drama"
+                }
+                );
+
 
             context.SaveChanges();
         }
