@@ -15,7 +15,7 @@ public class GetDirectorsQuery
 
     public List<DirectorsViewModel> Handle()
     {
-        var directors = _dbContext.Directors.OrderBy(x => x.Id).ToList();
+        var directors = _dbContext.Directors.Where(x => x.DirectedByMovies).OrderBy(x => x.Id).ToList();
         List<DirectorsViewModel> vm = _mapper.Map<List<DirectorsViewModel>>(directors);
         return vm;
     }
@@ -24,6 +24,6 @@ public class DirectorsViewModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string DirectedByMovies { get; set; }
+    public bool DirectedByMovies { get; set; }
 
 }

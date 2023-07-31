@@ -8,6 +8,5 @@ public class UpdateDirectorCommandValidator : AbstractValidator<UpdateDirectorCo
     {
         RuleFor(command => command.model.FirstName).MinimumLength(4);
         RuleFor(command => command.model.LastName).MinimumLength(4);
-        RuleFor(command => command.model.DirectedByMovies).MinimumLength(4);
     }
 }

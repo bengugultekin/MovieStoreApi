@@ -8,7 +8,8 @@ public class UpdateMovieCommandValidator : AbstractValidator<UpdateMovieCommand>
     {
         RuleFor(command => command.model.Name).MinimumLength(0);
         RuleFor(command => command.model.PublishDate).NotEmpty().LessThan(DateTime.Now.Date);
-        RuleFor(command => command.model.Genre).MinimumLength(3);
+        RuleFor(command => command.model.GenreId).GreaterThan(0);
+        RuleFor(command => command.model.DirectorId).GreaterThan(0);
         RuleFor(command => command.model.Price).GreaterThan(0);
     }
 }

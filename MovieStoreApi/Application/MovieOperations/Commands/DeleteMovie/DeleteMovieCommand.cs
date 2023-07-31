@@ -18,7 +18,20 @@ public class DeleteMovieCommand
         {
             throw new InvalidOperationException("Silinecek Film Bulunamadı");
         }
+
+        int directorId = movie.DirectorId;
+
         _dbContext.Movies.Remove(movie);
         _dbContext.SaveChanges();
+
+        // Filme ait DirectorId başka bir film yönetmeni değilse Director.DirectedByMovies özelliği false olarak değişmeli
+        var directorMovies = _dbContext.Movies.Any(x => x.DirectorId == directorId && x.Id != MovieId);
+        var director = _dbContext.Directors.FirstOrDefault(x => x.Id == directorId);
+
+        if(director != null && !directorMovies) 
+        {
+            director.DirectedByMovies = false;
+            _dbContext.SaveChanges();
+        }
     }
 }

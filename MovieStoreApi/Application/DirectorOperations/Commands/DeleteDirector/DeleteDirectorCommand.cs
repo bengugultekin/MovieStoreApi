@@ -18,6 +18,11 @@ public class DeleteDirectorCommand
         {
             throw new InvalidOperationException("Silinecek Yönetmen Bulunamadı");
         }
+        else if (director.DirectedByMovies == true)
+        {
+            throw new InvalidOperationException("Yönetmenin yönettiği filmler mevcut. Önce filmleri silin");
+        }
+
         _dbContext.Directors.Remove(director);
         _dbContext.SaveChanges();
     }

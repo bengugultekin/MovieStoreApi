@@ -46,6 +46,30 @@ public class DataGenerator
                     Name = "Drama"
                 }
                 );
+            context.Movies.AddRange(
+                new Movie
+                {
+                    Name = "Interseller",
+                    GenreId = 1,
+                    DirectorId = 1,
+                    PublishDate = new DateTime(2002, 12, 11),
+                    Price = 50,
+                }
+                );
+            context.Directors.AddRange(
+                new Director
+                {
+                    FirstName = "Harry",
+                    LastName = "Ericson",
+                    DirectedByMovies = true,
+                },
+                new Director
+                {
+                    FirstName = "Daniel",
+                    LastName = "Black",
+                    DirectedByMovies = false,
+                }
+                );
 
 
             context.SaveChanges();

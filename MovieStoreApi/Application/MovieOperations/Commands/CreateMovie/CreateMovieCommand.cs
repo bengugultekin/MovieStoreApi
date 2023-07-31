@@ -27,12 +27,21 @@ public class CreateMovieCommand
 
         _dbContext.Movies.Add(movie);
         _dbContext.SaveChanges();
+
+        // Yeni bir film eklendiğinde, yönetmenin DirectedByMovies özelliği true olmalı
+        var director = _dbContext.Directors.FirstOrDefault(x => x.Id == model.DirectorId);
+        if (director != null) 
+        {
+            director.DirectedByMovies = true;
+            _dbContext.SaveChanges();
+        }
     }
 }
 public class CreateMovieModel
 {
     public string Name { get; set; }
     public DateTime PublishDate { get; set; }
-    public string Genre { get; set; }
+    public int GenreId { get; set; }
+    public int DirectorId { get; set; }
     public decimal Price { get; set; }
 }

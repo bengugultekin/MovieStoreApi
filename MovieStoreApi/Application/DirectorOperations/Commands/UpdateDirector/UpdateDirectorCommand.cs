@@ -28,5 +28,5 @@ public class UpdateDirectorModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string DirectedByMovies { get; set; }
+    public bool DirectedByMovies { get; set; }
 }

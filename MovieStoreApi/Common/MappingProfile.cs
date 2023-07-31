@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MovieStoreApi.Application.ActorOperations.Commands;
 using MovieStoreApi.Application.ActorOperations.Queries;
+using MovieStoreApi.Application.CustomerOperations.Commands;
+using MovieStoreApi.Application.CustomerOperations.Queries;
 using MovieStoreApi.Application.DirectorOperations;
 using MovieStoreApi.Application.DirectorOperations.Queries;
 using MovieStoreApi.Application.MovieOperations.Commands;
@@ -20,8 +22,13 @@ public class MappingProfile : Profile
         CreateMap<Director, DirectorDetailViewModel>();
         CreateMap<CreateDirectorModel, Director>();
 
-        CreateMap<Director, MoviesViewModel>();
-        CreateMap<Director, MovieDetailViewModel>();
+        CreateMap<Movie, MoviesViewModel>().ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name)).ForMember(dest => dest.Director, opt => opt.MapFrom(src => src.Director.FirstName + " " + src.Director.LastName));
+        CreateMap<Movie, MovieDetailViewModel>().ForMember(dest => dest.Genre, opt => opt.MapFrom(src => src.Genre.Name)).ForMember(dest => dest.Director, opt => opt.MapFrom(src => src.Director.FirstName + " " + src.Director.LastName));
         CreateMap<CreateMovieModel, Movie>();
+
+        CreateMap<CreateCustomerModel, Customer>();
+        CreateMap<Customer, CustomersViewModel>();
+        CreateMap<Customer, CustomerDetailViewModel>().ForMember(dest => dest.FavoriteGenres, opt => opt.MapFrom(src => src.Genre.Name));
+
     }
 }

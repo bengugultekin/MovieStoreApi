@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
 
 namespace MovieStoreApi.Application.MovieOperations.Queries;
 
@@ -17,7 +18,7 @@ public class GetMovieDetailQuery
 
     public MovieDetailViewModel Handle()
     {
-        var movie = _dbContext.Movies.SingleOrDefault(x =>x.Id == MovieId);
+        var movie = _dbContext.Movies.Include(x => x.Genre).Include(x => x.Director).Where(movie => movie.Id == MovieId).SingleOrDefault();
         if (movie is null)
         {
             throw new InvalidOperationException("Film Bulunamadı");
@@ -31,5 +32,6 @@ public class MovieDetailViewModel
     public string Name { get; set; }
     public DateTime PublishDate { get; set; }
     public string Genre { get; set; }
+    public string Director { get; set; }
     public decimal Price { get; set; }
 }
