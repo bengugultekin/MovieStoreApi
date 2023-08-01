@@ -1,4 +1,7 @@
 ﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using MovieStoreApi.Application.MovieOperations.Commands;
+using MovieStoreApi.Application.MovieOperations.Queries;
 
 namespace MovieStoreApi.Application.CustomerOperations.Commands;
 
@@ -16,7 +19,10 @@ public class CreateCustomerCommand
 
     public void Handle()
     {
-        var customer = _dbContext.Customers.SingleOrDefault(x => x.FirstName == Model.FirstName && x.LastName == Model.LastName);
+        var customer = _dbContext.Customers
+            .Include(x => x.FavoriteGenres)
+            .Include(x => x.BoughtMovies)
+            .SingleOrDefault(x => x.FirstName == Model.FirstName && x.LastName == Model.LastName);
 
         if(customer is not null) 
         {
@@ -33,6 +39,6 @@ public class CreateCustomerModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public int[] FavoriteGenresId { get; set; }
-    public int[] BuyedFilmsId { get; set; }
+    public List<GenreViewModel> FavoriteGenres { get; set; } = new List<GenreViewModel>();
+    public List<BuyMovie> BuyMovie { get; set; } = new List<BuyMovie>();
 }

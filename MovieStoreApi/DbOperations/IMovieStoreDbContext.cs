@@ -9,6 +9,7 @@ public interface IMovieStoreDbContext
     DbSet<Director> Directors { get; set; }
     DbSet<Genre> Genres { get; set; }
     DbSet<Customer> Customers { get; set; }
+    DbSet<User> Users { get; set; }
 
     int SaveChanges();
 }

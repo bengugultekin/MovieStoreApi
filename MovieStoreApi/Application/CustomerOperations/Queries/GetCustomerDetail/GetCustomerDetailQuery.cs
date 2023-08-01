@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using MovieStoreApi.Application.MovieOperations.Queries;
 
 namespace MovieStoreApi.Application.CustomerOperations.Queries;
 
@@ -17,7 +18,9 @@ public class GetCustomerDetailQuery
 
     public CustomerDetailViewModel Handle()
     {
-        var customer = _dbContext.Customers.Include(x => x.FavoriteGenres).Include(x => x.BuyedFilms).SingleOrDefault();
+        var customer = _dbContext.Customers
+            .Include(x => x.FavoriteGenres)
+            .Include(x => x.BoughtMovies).SingleOrDefault();
         if (customer == null) 
         {
             throw new InvalidOperationException("Müşteri Bulunamadı");
@@ -32,6 +35,6 @@ public class CustomerDetailViewModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string[] FavoriteGenres { get; set; }
-    public string[] BuyedFilms { get; set; }
+    public List<GenreViewModel> FavoriteGenres { get; set; } = new List<GenreViewModel>();
+    public List<BoughtMovieModel> BoughtMovies { get; set; } = new List<BoughtMovieModel>();
 }

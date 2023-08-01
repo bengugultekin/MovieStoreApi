@@ -13,4 +13,5 @@ public class Movie
     public Genre Genre { get; set; }
     public Director Director { get; set; }
     public decimal Price { get; set; }
+    public ICollection<Actor> Actors { get; set; } = new List<Actor>();
 }

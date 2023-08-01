@@ -30,5 +30,4 @@ public class ActorDetailViewModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string StarringMovies { get; set; }
 }

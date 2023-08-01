@@ -12,50 +12,42 @@ public class DataGenerator
             {
                 return;
             }
-            context.Actors.AddRange(
-                new Actor
-                {
-                    FirstName = "Victor",
-                    LastName = "Hugo",
-                    StarringMovies = "first"
-                },
-                new Actor
-                {
-                    FirstName = "William",
-                    LastName = "Shakespeare",
-                    StarringMovies = "first"
-                },
-                new Actor
-                {
-                    FirstName = "Stefan",
-                    LastName = "Zweig",
-                    StarringMovies = "first"
-                }
-                );
-            context.Genres.AddRange(
-                new Genre
-                {
-                    Name = "Documentary"
-                },
-                new Genre
-                {
-                    Name = "Science Fiction"
-                },
-                new Genre
-                {
-                    Name = "Drama"
-                }
-                );
-            context.Movies.AddRange(
-                new Movie
-                {
-                    Name = "Interseller",
-                    GenreId = 1,
-                    DirectorId = 1,
-                    PublishDate = new DateTime(2002, 12, 11),
-                    Price = 50,
-                }
-                );
+            var actor1 = new Actor
+            {
+                FirstName = "Victor",
+                LastName = "Hugo",
+            };
+            var actor2 = new Actor
+            {
+                FirstName = "William",
+                LastName = "Shakespeare",
+            };
+            var actor3 = new Actor
+            {
+                FirstName = "Stefan",
+                LastName = "Zweig",
+            };
+            var genre1 = new Genre
+            {
+                Name = "Documentary"
+            };
+            var genre2 = new Genre
+            {
+                Name = "Science Fiction"
+            };
+            var genre3 = new Genre
+            {
+                Name = "Drama"
+            };
+            var movie1 = new Movie
+            {
+                Name = "Interseller",
+                GenreId = 1,
+                DirectorId = 1,
+                PublishDate = new DateTime(2002, 12, 11),
+                Price = 50,
+                Actors = new List<Actor> { actor1, actor2 }
+            };
             context.Directors.AddRange(
                 new Director
                 {
@@ -68,6 +60,15 @@ public class DataGenerator
                     FirstName = "Daniel",
                     LastName = "Black",
                     DirectedByMovies = false,
+                }
+                );
+            context.Customers.AddRange(
+                new Customer
+                {
+                    FirstName = "Bengu",
+                    LastName = "Gultekin",
+                    FavoriteGenres = new List<Genre> { genre1, genre2 },
+                    BoughtMovies = new List<Movie> { movie1 }
                 }
                 );
 

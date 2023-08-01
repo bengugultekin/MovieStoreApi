@@ -8,7 +8,5 @@ public class UpdateCustomerCommandValidator : AbstractValidator<UpdateCustomerCo
     {
         RuleFor(command => command.model.FirstName).MinimumLength(4);
         RuleFor(command => command.model.LastName).MinimumLength(4);
-        RuleFor(command => command.model.FavoriteGenresId).NotEmpty();
-        RuleFor(command => command.model.BuyedFilmsId).NotEmpty();
     }
 }

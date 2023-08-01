@@ -8,6 +8,5 @@ public class UpdateActorCommandValidator : AbstractValidator<UpdateActorCommand>
     {
         RuleFor(command => command.model.FirstName).MinimumLength(4);
         RuleFor(command => command.model.LastName).MinimumLength(4);
-        RuleFor(command => command.model.StarringMovies).MinimumLength(4);
     }
 }

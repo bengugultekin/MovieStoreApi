@@ -9,7 +9,5 @@ public class CreateCustomerCommandValidator : AbstractValidator<CreateCustomerCo
     {
         RuleFor(command => command.Model.FirstName).MinimumLength(4);
         RuleFor(command => command.Model.LastName).MinimumLength(4);
-        RuleFor(command => command.Model.FavoriteGenresId).NotEmpty();
-        RuleFor(command => command.Model.BuyedFilmsId).NotEmpty();
     }
 }

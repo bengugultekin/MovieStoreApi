@@ -19,7 +19,6 @@ public class UpdateActorCommand
         }
         actor.FirstName = string.IsNullOrEmpty(model.FirstName.Trim()) ? actor.FirstName : model.FirstName;
         actor.LastName = string.IsNullOrEmpty(model.LastName.Trim()) ? actor.LastName : model.LastName;
-        actor.StarringMovies = model.StarringMovies;
 
         _dbContext.SaveChanges();
     }
@@ -28,5 +27,4 @@ public class UpdateActorViewModel
 {
     public string FirstName { get; set; }
     public string LastName { get; set; }
-    public string StarringMovies { get; set; }
 }

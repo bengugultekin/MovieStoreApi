@@ -27,6 +27,14 @@ public class UpdateMovieCommand
         movie.PublishDate = model.PublishDate != default ? model.PublishDate : movie.PublishDate;
         movie.Price = model.Price != default ? model.Price : movie.Price;
 
+        movie.Actors.Clear();
+        var actors = CheckIfPlayerExist();
+
+        foreach (var actor in actors)
+        {
+            movie.Actors.Add(actor);
+        }
+
         _dbContext.SaveChanges();
 
         // Director bilgisi güncellendiğinde, eğer director ün başka yönettiği film yoksa DirectedByMovies false olmalı
@@ -47,6 +55,24 @@ public class UpdateMovieCommand
             _dbContext.SaveChanges();
         }
     }
+
+    private List<Actor> CheckIfPlayerExist()
+    {
+        List<Actor> actors = new List<Actor>();
+        foreach (int actorsId in model.ActorsId)
+        {
+            Actor? searchedActor = _dbContext.Actors.SingleOrDefault(x => x.Id == actorsId);
+
+            if (searchedActor == null)
+            {
+                throw new InvalidOperationException("Aktör Mevcut Değil");
+            }
+
+            actors.Add(searchedActor);
+        }
+
+        return actors;
+    }
 }
 public class UpdateMovieModel
 {
@@ -55,4 +81,5 @@ public class UpdateMovieModel
     public int GenreId { get; set; }
     public int DirectorId { get; set; }
     public decimal Price { get; set; }
+    public List<int> ActorsId { get; set; } = new List<int>();
 }

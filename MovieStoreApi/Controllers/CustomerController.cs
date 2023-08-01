@@ -56,7 +56,7 @@ public class CustomerController : ControllerBase
     [HttpPut("{id}")]
     public IActionResult UpdateCustomer(int id, [FromBody] UpdateCustomerViewModel updatedCustomer)
     {
-        UpdateCustomerCommand command = new UpdateCustomerCommand(_context);
+        UpdateCustomerCommand command = new UpdateCustomerCommand(_context, _mapper);
         command.CustomerId = id;
         command.model = updatedCustomer;
         UpdateCustomerCommandValidator validator = new UpdateCustomerCommandValidator();
@@ -75,4 +75,6 @@ public class CustomerController : ControllerBase
         command.Handle();
         return Ok();
     }
+
+
 }
